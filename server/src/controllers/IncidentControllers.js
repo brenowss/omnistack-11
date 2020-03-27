@@ -10,7 +10,9 @@ module.exports = {
       description,
       value,
       ong_id
-    });
+    }).catch((err) => console.log('peguei')
+    );
+
     return res.json({ id });
   },
 
@@ -20,10 +22,9 @@ module.exports = {
     const [count] = await connection("incidents").count();
 
     const incidents = await connection("incidents")
-    .join('ongs', 'ong_id', '=', 'incidents.ong_id')
+    .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
       .limit(5)
       .offset((page - 1) * 5)
-      .distinct()
       .select([
         'incidents.*',
         'ongs.name',
@@ -31,7 +32,8 @@ module.exports = {
         'ongs.whatsapp',
         'ongs.city',
         'ongs.uf'
-      ]);
+      ])
+      .distinct('incidents.id');
 
     res.header("X-Total-Count", count["count(*)"]);
 
@@ -42,7 +44,7 @@ module.exports = {
     const { id } = req.params;
     const ong_id = req.headers.authorization;
 
-    const incident = await connection("incidents")
+    const incident = await connection("ongs")
       .where("id", id)
       .select("ong_id")
       .first();
