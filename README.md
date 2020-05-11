@@ -63,4 +63,4 @@ A interface web é responsável pelo cadastro e gerenciamento das ONGs.
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@diego3g](https://github.com/kylelobo) - Criador do projeto e tutor das aulas da semana
+- [@diego3g](https://github.com/diego3g) - Criador do projeto e tutor das aulas da semana
